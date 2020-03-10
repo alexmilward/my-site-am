@@ -1,0 +1,109 @@
+---
+title: Hawaii Land-Use and Watershed Analysis
+author: Alex Milward
+date: '2020-03-09'
+slug: '.'
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-03-09T19:22:28-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+# Attach packages
+library(tidyverse)
+library(janitor)
+library(here)
+library(sf)
+library(tmap)
+library(mapview)
+library(leaflet)
+```
+
+
+## Introduction
+
+Spatial data showing land-use types and watersheds for all islands that make up the state of Hawaii have been provided by the [*Hawaii Statewide GIS Program*](http://geoportal.hawaii.gov/search).  This report visualizes land-use and watershed data in multiple interactive maps.  The first map shows land-use type across the state, and the total area covered by each land-use type (Figure 2.).  The second map shows the location, area covered, and names of all watersheds in the state (Figure 3.)  This report provides a visual analysis of unique spatial features in Hawaii.
+
+RStudio packages for this analysis include: tidyverse, janitor, here, sf, tmap, mapview, and leaflet.
+All data analysis and visualization was produced using RStudio Version 1.2.1335.
+
+![**Figure 1.** Hawaiin Islands. Credit: [Free World Maps](https://www.freeworldmaps.net/united-states/hawaii/map.html)](hawaii-islands-map.jpg)
+
+### Land-Use
+```{r}
+# Read in and look at data
+land_use <- read_sf(dsn = here("content", "project", "spatial-project", "Land_Use_Land_Cover_LULC"), layer = "Land_Use_Land_Cover_LULC") 
+ 
+
+# Look at land-use specifically referring to only forested wetlands, estuaries and bays, and cropland/pastures
+land_use_2 <- land_use %>% 
+  select(landcover) %>% 
+  rename(land_use = landcover) %>% 
+  filter(land_use %in% c("Cropland and Pasture", "Forested Wetland", "Bays and Estuaries", "Commercial and Services", "Bare Exposed Rock", "Residential", "Shrub and Brush Rangeland"))
+
+# plot(land_use)
+
+land_use_map <- ggplot(data = land_use_2) +
+  geom_sf(aes(fill = land_use),
+          color = NA, show.legend = TRUE) 
+```
+
+```{r}
+# tmap
+landcover <- land_use %>% 
+  select(landcover, st_areasha)
+
+land_use_tmap <- tm_basemap("Hydda.Base") +
+  tm_shape(landcover) +
+  tm_fill(c("landcover", "st_areasha"), alpha = 1, legend.show = FALSE) 
+  
+
+tmap_mode("view")
+land_use_tmap
+```
+
+**Figure 2** Interactive map of Hawaii, faceted by land-use cover and area covered by land-use type.  Evergreen forest land, bare exposed rock, and mixed bush and shrub rangeland cover the majority of all islands of Hawaii.  For the state, residential and commercial areas make up a very small proportion of land-use and total area covered.
+
+
+### Watersheds
+```{r}
+# Read in data
+watersheds <- read_sf(dsn = here("content", "project", "spatial-project", "Watersheds"), layer = "Watersheds") %>% 
+  select(wuname)
+
+# plot(watersheds)
+```
+
+```{r}
+watersheds_cover <- watersheds %>% 
+  rename(name = wuname)
+
+watersheds_tmap <- tm_basemap("Hydda.Base") +
+  tm_shape(watersheds_cover) +
+  tm_fill("name", alpha = 1, legend.show = FALSE) +
+  tmap_options(max.categories = 527)
+
+tmap_mode("view")
+watersheds_tmap
+```
+
+**Figure 3** Interactive map of Hawaii showing all watersheds in the state.  Hovering over each area reveals the watershed name.  The largest watersheds are found on the big island of Hawaii, and include the Pohakuloa, Wailuku, Kaahakini, and Pahala watersheds.  For such seemingly small land-area, there are 558 total watersheds, owing to the unique topography of the state. 
+
+
+**Sources:** 
+
+Hawaii Statewide GIS Program. (2019). GDSI, 1995, 1999; State of Hawaii Commission on Water Resource Management (CWRM), 2008. Provided to State GIS, August, 2017. Available from http://geoportal.hawaii.gov/datasets/watersheds
+
+Hawaii Statewide GIS Program. (2020). 1976 Digital GIRAS (Geographic Information Retrieval and Analysis). Provided to State GIS, Octover, 2017. Avaialbe from http://geoportal.hawaii.gov/datasets/land-use-land-cover-lulc

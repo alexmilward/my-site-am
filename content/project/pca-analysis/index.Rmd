@@ -1,0 +1,91 @@
+---
+title: PCA Analysis of Climate Variables
+author: Alex Milward
+date: '2020-03-09'
+slug: '.'
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-03-09T19:01:30-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+
+# Attach packages
+library(tidyverse)
+library(janitor)
+library(ggfortify)
+```
+
+### Introduction
+
+Environmental and climatic factors of 243 countries were compiled by *@zander_venter on Kaggle* through Google Earth and public remote sensing data.  This analysis looks to examine the multivariate relationship between climatological and land use factors inlcuding accessibility to cities, elevation, cropland cover, tree canopy cover, mean temperature, mean rainfall, and cloudiness for countries listed as having greater than 50% cropland cover.  In the following principle components analysis, the relationshiop between these factors and their correlation is explored (Figure 1).
+
+Necessary packages for this analysis include: tidyverse, janitor, and ggfortify.
+All data analysis and visualization was produced using RStudio Version 1.2.1335
+
+### PCA Analysis
+
+```{r}
+# Read in data
+
+variables <- read_csv("world_env_vars.csv") %>% 
+  clean_names() 
+
+# Wrangle data to filter countries with greater than 50.0 cropland_cover metrics
+# Select climate related variables as well as land use variables including accessibility_to_cities, elevation, cropland_cover, tree_canopy_cover, temp_mean_annual, rain_mean_annual, and cloudiness
+# Remove observations, if any, that have 'na' values for any variable(s)
+
+variables_sub <- variables %>% 
+  filter(cropland_cover > 50.0) %>% 
+  select(accessibility_to_cities, elevation, cropland_cover, tree_canopy_cover, temp_mean_annual, rain_mean_annual, cloudiness) %>% 
+  drop_na()
+
+# Create primary components analysis 
+
+my_pca <- prcomp(variables_sub, scale = TRUE)
+
+# View PCA
+#my_pca      #(uncheck to see compenenet eigenvalues/eigenvectors)
+
+# Create biplot using PCA created above
+
+my_biplot <- autoplot(my_pca,
+                      colour = NA, 
+                      loadings.label = TRUE,
+                      loadings.label.size = 3,
+                      loadings.label.colour = "black",
+                      loadings.label.repel = TRUE) +
+  theme_bw() +
+  scale_x_continuous(limits = c(-.35, 0.3)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(title = "Principle components analysis plot of climate and land-use variables",
+       x = "Principle Component 1 (34.48%)",
+       y = "Principle Component 2 (26.69%)")
+
+# View biplot
+my_biplot
+
+```
+
+**Figure 1.** Principle components analysis for accessibility to cities, elevation, cropland cover, tree canopy cover, mean temperature, mean rainfall, and cloudiness for countries with greater than 50% cropland cover. *Data from: Zander Venter*
+
+### Summary
+- Tree canopy cover and cropland cover values are inverseley related
+  - This makes sense, as cropland and forested areas are drastically different land uses
+- Tree cover and cropland cover show minimal correlation to average rainfall and average temperature
+- Elevation and cropland cover are negatively correlated
+  - Possibly do to less suitable cropland at high elevations
+- Elevation and accessibility to cities are positively correlated
+- Cloudiness and tree canopy cover are positively correlated, possibly due to increased evapotranspiration.

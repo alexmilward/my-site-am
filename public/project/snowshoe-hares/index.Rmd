@@ -1,0 +1,118 @@
+---
+title: Snowshoe Hare Abundance Analysis
+author: Alex Milward
+date: '2020-03-09'
+slug: '.'
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-03-09T19:09:07-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+
+# Attach packages
+library(tidyverse)
+library(janitor)
+library(kableExtra)
+library(ggbeeswarm)
+library(ggridges)
+library(hexbin)
+library(lubridate)
+
+```
+
+
+### Introduction
+
+The following analysis looks at the abundance and body weight statistics of snowshoe hare populations sampled by the *Bonanza Creek Long-Term Ecological Research team* in the Bonanza Creek Experimental Forest outside of Fairbanks, Alaska.  Snowshoe hare weight by species sex was then compared and plotted (Figure 3).  Summary statistics, including mean weight in grams, standard deviation, standard error, and sample size are provided for males and females (Table 1).
+
+Necessary packages for this analysis include: tidyverse, janitor, kableExtra, and ggbeeswarm.
+All data analysis and visualization was produced using RStudio Version 1.2.1335.
+
+
+![**Figure 1.** Snowshoe Hare (Lepus americanus). Credit: [The National Wildlife Federation](https://www.nwf.org/Educational-Resources/Wildlife-Guide/Mammals/Snowshoe-Hare)](mammal_snowshoe-hare_600x300.jpg)
+
+![**Figure 2.** Bonanza Creek Experimental Forest map. Credit: [PolarTec](https://www.polartrec.com/expeditions/carbon-balance-in-warming-and-drying-tundra-2013/journals/2013-04-29)](bnz_lter.gif)
+
+
+
+### Analysis
+
+```{r}
+# Read in data:
+
+snowshoes <- read_csv("showshoe_lter.csv")
+
+
+# Wrangle data to select for sex, weight, and grid
+# Tidy data to lowercase format, filtered for only confirmed males and females (omitted any data entries with ?)
+# dropped all observations with 'na'
+snowshoes_tidy2 <- snowshoes %>% 
+  select(sex, weight, grid) %>% 
+  mutate(grid = str_to_lower(grid)) %>% 
+  mutate(sex = str_to_lower(sex)) %>% 
+  filter(sex %in% c("m", "f")) %>% 
+  mutate(sex = case_when(
+    sex == "m" ~ "Male",
+    sex == "f" ~ "Female"
+  )) %>% 
+  drop_na()
+
+
+```
+
+```{r}
+# Visualize data in beeswarm
+# facet by sampling grid and separate by sex
+
+ggplot(data = snowshoes_tidy2, aes(x = sex, y = weight)) +
+  geom_beeswarm(aes(color = sex), size = 0.5, width = 0.2, show.legend = FALSE) +
+  theme_bw() +
+  facet_wrap(~grid) +
+  labs(title = "Snowshoe Hare weight by sex for each sampling grid",
+       subtitle = "1998 - 2012",
+       x = "Sex",
+       y = "Weight (g)")
+  
+```
+
+**Figure 3.** Beeswarm plot showing weights of individual Snowshoe Hares across three sampling plots.  Females are represented by the orange points, and Males are represented by the blue points. There is no clear visual difference in weight between males and females.  Bonbs site refers to a site used to live trap hares. Bonmat refers to "Bonanza Mature" - a mature forest sampling site for hares.  Bonrip refers to "Bonanza Riparian" - a flood zone and forested area sampling site.  Abundance of hares in bonrip and bonbs greatly outnumberd abundance in bonmat.  *Data: Bonanza Creek Long-Term Ecological Research*
+
+
+### Summary Statistics
+**Table 1.** The table below shows summary statistics for Snowshoe Hare weight by sex, including mean weight in grams, standard deviation, standard error, and sample size.  Female Hares have a slightly larger mean weight than males across all sites. *Data: Bonanza Creek Long-Term Ecological Research*
+  
+```{r}
+# Summary statistics
+
+snowshoes_summary <- snowshoes_tidy2 %>%
+  group_by(sex) %>% 
+  summarize(mean_weight = mean(weight),
+            sd_weight = sd(weight),
+            standard_error = (sd(weight)/sqrt(length(weight))),
+            sample_size = n()) %>% 
+  mutate_if(is.numeric, round, 2)
+
+snowshoes_summary %>% 
+  kable(col.names = c("Sex", "Mean Weight (g)", "Standard Deviation", "Standard Error", "Sample Size")) %>% 
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left") %>% 
+  add_header_above(c("Snowshoe hare summary statistics by sex" = 5))
+
+
+```
+
+### Referances
+
+**Kielland K., F. S. Chapin, R. W. Ruess. 2017.** *Snowshoe hare physical data in Bonanza Creek Experimental Forest: 1999-Present.* Environmental Data Initiative. https://doi.org/10.6073/pasta/03dce4856d79b91557d8e6ce2cbcdc14

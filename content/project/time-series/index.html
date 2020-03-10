@@ -1,0 +1,48 @@
+---
+title: Steelhead Migration Time Series Analysis
+author: Alex Milward
+date: '2020-03-09'
+slug: '.'
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-03-09T19:17:28-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Steelhead passage through the Bonneville Dam in Oregon has been recorded on a daily basis from 1939 through September of 2019, and the data for these recordings has been provided by <a href="http://www.cbr.washington.edu/dart/query/adult_basin_sum"><em>Columbia Basin Research at the University of Washington</em></a>. This report explores time series data and visualizes daily, monthly, and annual counts of steelhead passage through the dam from 1939 to 2019 (Figures 2, 3, 4). These visualizations show temporal variation in steelhead passage through the years.</p>
+<p>RStudio packages for this analysis include: tidyverse, janitor, lubridate, here, tsibble, and paletteer.
+All data analysis and visualization was produced using RStudio Version 1.2.1335.</p>
+<div class="figure">
+<img src="bonneville.jpeg" alt="Figure 1. Bonneville Dam, Oregon. Credit: US Army Corps of Engineers" />
+<p class="caption"><strong>Figure 1.</strong> Bonneville Dam, Oregon. Credit: <a href="https://www.nwp.usace.army.mil/bonneville/">US Army Corps of Engineers</a></p>
+</div>
+<div id="daily-variation-in-steelhead-passage" class="section level3">
+<h3>Daily variation in steelhead passage:</h3>
+<p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>Figure 2.</strong> Daily observations for counts of steelhead passing through Bonneville Dam visualized. Daily counts appear to follow a consistant seasonality with the start of each year experiencing much lower counts than the middle of each year. Daily counts peak in 2009 and taper off to lower than 1940 daily values at the end of 2019. <em>Data: Columbia Basin Research</em></p>
+</div>
+<div id="monthly-variation-in-steelhead-passage" class="section level3">
+<h3>Monthly variation in steelhead passage:</h3>
+<p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><strong>Figure 3.</strong> Monthly observations for counts of steelhead passing through Bonneville Dam visualized. Counts of steelhead passing are aggreggated by month from 1939 to 2019. Here we see the highest counts through the years are observed in July (yellow), August (brown), and September (gold), with hardly any observations in the winter months. <em>Data: Columbia Basin Research</em></p>
+</div>
+<div id="annual-variation-in-steelhead-passage" class="section level3">
+<h3>Annual variation in steelhead passage:</h3>
+<p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><strong>Figure 4.</strong> Annual counts of steelhead passing through Bonneville Dam visualized by the purple line from 1939 to 2019. Counts remain below 400,000 steelheads annually, with the first big peak reaching around 380,000 in 1986. The largest peaks occur in 2001 and 2009, with 633,073 and 604,970 steelheads, respectively. Since 2009, annual steelhead passage through the dam has decreased, to a low of 77,195 in 2019. <em>Data: Columbia Basin Research</em></p>
+<p><strong>Sources:</strong>
+Columbia River DART, Columbia Basin Research, University of Washington. (2019). Adult Passage Graphics &amp; Text. Available from <a href="http://www.cbr.washington.edu/dart/query/adult_graph_text" class="uri">http://www.cbr.washington.edu/dart/query/adult_graph_text</a></p>
+</div>
+</div>

@@ -1,0 +1,48 @@
+---
+title: PCA Analysis of Climate Variables
+author: Alex Milward
+date: '2020-03-09'
+slug: '.'
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-03-09T19:01:30-07:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>Environmental and climatic factors of 243 countries were compiled by <em><span class="citation">@zander_venter</span> on Kaggle</em> through Google Earth and public remote sensing data. This analysis looks to examine the multivariate relationship between climatological and land use factors inlcuding accessibility to cities, elevation, cropland cover, tree canopy cover, mean temperature, mean rainfall, and cloudiness for countries listed as having greater than 50% cropland cover. In the following principle components analysis, the relationshiop between these factors and their correlation is explored (Figure 1).</p>
+<p>Necessary packages for this analysis include: tidyverse, janitor, and ggfortify.
+All data analysis and visualization was produced using RStudio Version 1.2.1335</p>
+</div>
+<div id="pca-analysis" class="section level3">
+<h3>PCA Analysis</h3>
+<p><img src="/project/pca-analysis/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><strong>Figure 1.</strong> Principle components analysis for accessibility to cities, elevation, cropland cover, tree canopy cover, mean temperature, mean rainfall, and cloudiness for countries with greater than 50% cropland cover. <em>Data from: Zander Venter</em></p>
+</div>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<ul>
+<li>Tree canopy cover and cropland cover values are inverseley related
+<ul>
+<li>This makes sense, as cropland and forested areas are drastically different land uses</li>
+</ul></li>
+<li>Tree cover and cropland cover show minimal correlation to average rainfall and average temperature</li>
+<li>Elevation and cropland cover are negatively correlated
+<ul>
+<li>Possibly do to less suitable cropland at high elevations</li>
+</ul></li>
+<li>Elevation and accessibility to cities are positively correlated</li>
+<li>Cloudiness and tree canopy cover are positively correlated, possibly due to increased evapotranspiration.</li>
+</ul>
+</div>
