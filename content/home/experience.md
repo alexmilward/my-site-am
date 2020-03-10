@@ -18,27 +18,36 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
-  title = "CEO"
-  company = "GenCoin"
+  title = "Principal Hazardous Waste Technician"
+  company = "UCSB Environmental Health and Safety"
   company_url = ""
-  location = "California"
-  date_start = "2017-01-01"
-  date_end = ""
-  description = """
+  location = "Santa Barbara, CA"
+  date_start = "2016-05-21"
+  date_end = "2019-08-01"
+  description = """Managed and	helped	direct	a	team	of	7-10	employees	conduct	the	operations	of	UCSB’s	Household	
+Hazardous	Waste	Program.
+
   Responsibilities include:
   
-  * Analysing
-  * Modelling
-  * Deploying
+  * Materials analysis
+  * Public relations
+  * Synthesizing technical reports
   """
 
 [[experience]]
-  title = "Professor"
-  company = "University X"
+  title = "Research	Assistant"
+  company = "Department of Geography - UC Santa Barbara"
   company_url = ""
-  location = "California"
-  date_start = "2016-01-01"
-  date_end = "2016-12-31"
-  description = """Taught electronic engineering and researched semiconductor physics."""
+  location = "Santa Barbara, CA"
+  date_start = "2017-09-01"
+  date_end = "2018-03-21"
+  description = """Collaborated	with	team	of	researchers	to	acquire and analyze soil samples from North Campus Open Space wetland restoration project.
+  
+  Responsibilities include:
+  
+  * Carbon/Nitrogen combustion analysis
+  * Data entry and analysis
+  * Field work
+  """
 
 +++
