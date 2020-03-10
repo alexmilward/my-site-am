@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | Academic</title>
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/authors/admin/</guid>
+      <description>&lt;p&gt;Alex Milward, a first year master student, grew up in a small, rural town on the west side of California’s Sierra Nevada Mountains.  Here he enjoyed an immersion in nature and developed a passion for the natural world. However, he was also witness to the environmental degradation that often accompanies an area rich in natural resources such as timber and water.  This led to a desire to pursue a career in environmental science and sustainability. Alex carried this passion to his undergraduate studies at the University of California, Santa Barbara, where he received a Bachelor of Science in Environmental Studies and Physical Geography in 2018. At UCSB, Alex conducted research alongside Dr. Jennifer King on wetland habitat restoration and its capacity to sequester atmospheric gases.  With this research came a curiosity of the influence that water was has on wetland habitats and the environment at large.  At Bren, Alex is specializing in water resources management, with a focus in environmental data science.  His goal is to analyze watersheds in the American west and develop new sustainability methods in regards to water appropriation, storage, and distribution to ensure the conservation of such a critical resource.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Robert Ford</title>
+      <link>/authors/robert-ford/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      <guid>/authors/robert-ford/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
