@@ -28,18 +28,88 @@ All data analysis and visualization was produced using RStudio Version 1.2.1335.
 <img src="bonneville.jpeg" alt="Figure 1. Bonneville Dam, Oregon. Credit: US Army Corps of Engineers" />
 <p class="caption"><strong>Figure 1.</strong> Bonneville Dam, Oregon. Credit: <a href="https://www.nwp.usace.army.mil/bonneville/">US Army Corps of Engineers</a></p>
 </div>
+<pre class="r"><code># Read in and look at data
+
+fish &lt;- read_csv(&quot;cbr_fish_passage_bonneville_allyrs_steelhead.csv&quot;) %&gt;% 
+  mutate(location = str_to_lower(location), parameter = str_to_lower(parameter)) %&gt;% 
+  rename(&quot;mmdd&quot; = &quot;mm-dd&quot;)
+
+# names(fish)
+# unique(fish$parameter)
+# unique(fish$`mm-dd`)
+# unique(fish$unit)
+# unique(fish$datatype)
+# unique(fish$value)</code></pre>
+<pre class="r"><code># Parse dates
+
+fish_clean &lt;- fish %&gt;% 
+  mutate(yearmonthday = str_c(year, mmdd, sep = &quot;-&quot;)) %&gt;% 
+  mutate(year_mo_day = lubridate::parse_date_time(yearmonthday, &quot;ydm&quot;)) %&gt;% 
+  mutate(day = day(year_mo_day)) %&gt;% 
+  mutate(month = month(year_mo_day, label = TRUE)) %&gt;% 
+  drop_na(value)
+  
+
+fish_dates &lt;- fish %&gt;% 
+  mutate(mo_day = lubridate::parse_date_time(mmdd, &quot;dm&quot;)) %&gt;% 
+  mutate(day = day(mo_day)) %&gt;% 
+  mutate(month = month(mo_day, label = TRUE)) %&gt;% 
+  select(-mo_day) </code></pre>
+<pre class="r"><code># Plot time series of daily data
+# fish_ts &lt;- as_tsibble(fish_clean, key = value, index = month)</code></pre>
 <div id="daily-variation-in-steelhead-passage" class="section level3">
 <h3>Daily variation in steelhead passage:</h3>
+<pre class="r"><code># daily plot through the years
+
+ggplot(data = fish_clean, aes(x = year_mo_day, y = value)) +
+  geom_line(color = &quot;blue&quot;, size = 0.2) +
+  labs(x = &quot;year&quot;,
+       y = &quot;steelhead passing per day&quot;,
+       title = &quot;Daily steelhead passage through Bonneville Damn&quot;,
+       subtitle = &quot;1939-2019&quot;) +
+  theme_dark() +
+  scale_y_continuous(limits = c(0,35000))</code></pre>
 <p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p><strong>Figure 2.</strong> Daily observations for counts of steelhead passing through Bonneville Dam visualized. Daily counts appear to follow a consistant seasonality with the start of each year experiencing much lower counts than the middle of each year. Daily counts peak in 2009 and taper off to lower than 1940 daily values at the end of 2019. <em>Data: Columbia Basin Research</em></p>
 </div>
 <div id="monthly-variation-in-steelhead-passage" class="section level3">
 <h3>Monthly variation in steelhead passage:</h3>
+<pre class="r"><code># Monthly passage through the years
+
+fish_monthly &lt;- fish_clean %&gt;% 
+  mutate(month_sep = yearmonth(year_mo_day)) %&gt;% 
+  group_by(month_sep, year, month) %&gt;% 
+  tally(value)
+
+ggplot(data = fish_monthly, aes(x = year, y = n)) +
+  geom_line(aes(color = month), show.legend = TRUE) +
+  theme_dark() +
+  scale_y_discrete(limits = c(0, 50000, 100000, 150000, 200000, 250000, 300000, 350000)) +
+  scale_x_discrete(limits = c(1940, 1960, 1980, 2000, 2020)) +
+  scale_color_paletteer_d(&quot;palettetown::rayquaza&quot;) +
+  labs(x = &quot;year&quot;,
+       y = &quot;monthly count&quot;,
+       title = &quot;Monthly steelhead counts through Bonneville Dam&quot;,
+       subtitle = &quot;1939-2019&quot;)</code></pre>
 <p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><strong>Figure 3.</strong> Monthly observations for counts of steelhead passing through Bonneville Dam visualized. Counts of steelhead passing are aggreggated by month from 1939 to 2019. Here we see the highest counts through the years are observed in July (yellow), August (brown), and September (gold), with hardly any observations in the winter months. <em>Data: Columbia Basin Research</em></p>
 </div>
 <div id="annual-variation-in-steelhead-passage" class="section level3">
 <h3>Annual variation in steelhead passage:</h3>
+<pre class="r"><code># Annual passage of fish through Bonneville Dam
+fish_annual &lt;- fish_clean %&gt;% 
+  group_by(year) %&gt;% 
+  summarize(tot = sum(value))
+
+ggplot(data = fish_annual, aes(x = year, y = tot)) +
+  geom_line(color = &quot;purple&quot;) +
+  theme_dark() +
+  scale_y_discrete(limits = c(0, 100000, 200000, 300000, 400000, 500000, 600000, 6550000)) +
+  scale_x_discrete(limits = c(1940, 1960, 1980, 2000, 2020)) +
+  labs(x = &quot;year&quot;,
+       y = &quot;annual count&quot;,
+       title = &quot;Annual steelhead counts through Bonneville Dam&quot;,
+       subtitle = &quot;1939-2019&quot;)</code></pre>
 <p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p><strong>Figure 4.</strong> Annual counts of steelhead passing through Bonneville Dam visualized by the purple line from 1939 to 2019. Counts remain below 400,000 steelheads annually, with the first big peak reaching around 380,000 in 1986. The largest peaks occur in 2001 and 2009, with 633,073 and 604,970 steelheads, respectively. Since 2009, annual steelhead passage through the dam has decreased, to a low of 77,195 in 2019. <em>Data: Columbia Basin Research</em></p>
 <p><strong>Sources:</strong>
