@@ -44,11 +44,6 @@
   
   <url>
     <loc>/project/</loc>
-    <lastmod>2020-03-09T19:09:07-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
     <lastmod>2020-03-09T19:17:28-07:00</lastmod>
   </url>
   
@@ -195,6 +190,11 @@
   <url>
     <loc>/publication/conference-paper/</loc>
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/snowshoe-hares/</loc>
+    <priority>0</priority>
   </url>
   
   <url>
