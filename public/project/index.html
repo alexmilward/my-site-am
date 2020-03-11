@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Introduction Steelhead passage through the Bonneville Dam in Oregon has been recorded on a daily basis from 1939 through September of 2019, and the data for these recordings has been provided by Columbia Basin Research at the University of Washington.">
+  <meta name="description" content="Introduction Spatial data showing land-use types and watersheds for all islands that make up the state of Hawaii have been provided by the Hawaii Statewide GIS Program. This report visualizes land-use and watershed data in multiple interactive maps.">
 
   
   <link rel="alternate" hreflang="en-us" href="/project/">
@@ -229,14 +229,14 @@
   
   <meta property="og:site_name" content="Alex Milward">
   <meta property="og:url" content="/project/">
-  <meta property="og:title" content="Steelhead Migration Time Series Analysis | Alex Milward">
-  <meta property="og:description" content="Introduction Steelhead passage through the Bonneville Dam in Oregon has been recorded on a daily basis from 1939 through September of 2019, and the data for these recordings has been provided by Columbia Basin Research at the University of Washington."><meta property="og:image" content="/project/featured.jpeg">
-  <meta property="twitter:image" content="/project/featured.jpeg"><meta property="og:locale" content="en-us">
+  <meta property="og:title" content="Hawaii Land-use and Watershed Analysis | Alex Milward">
+  <meta property="og:description" content="Introduction Spatial data showing land-use types and watersheds for all islands that make up the state of Hawaii have been provided by the Hawaii Statewide GIS Program. This report visualizes land-use and watershed data in multiple interactive maps."><meta property="og:image" content="/project/featured.jpg">
+  <meta property="twitter:image" content="/project/featured.jpg"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2020-03-09T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2020-03-10T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2020-03-09T19:17:28-07:00">
+    <meta property="article:modified_time" content="2020-03-10T20:28:53-07:00">
   
 
   
@@ -260,14 +260,14 @@
     "@type": "WebPage",
     "@id": "/project/"
   },
-  "headline": "Steelhead Migration Time Series Analysis",
+  "headline": "Hawaii Land-use and Watershed Analysis",
   
   "image": [
-    "/project/featured.jpeg"
+    "/project/featured.jpg"
   ],
   
-  "datePublished": "2020-03-09T00:00:00Z",
-  "dateModified": "2020-03-09T19:17:28-07:00",
+  "datePublished": "2020-03-10T00:00:00Z",
+  "dateModified": "2020-03-10T20:28:53-07:00",
   
   "author": {
     "@type": "Person",
@@ -282,7 +282,7 @@
       "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Introduction Steelhead passage through the Bonneville Dam in Oregon has been recorded on a daily basis from 1939 through September of 2019, and the data for these recordings has been provided by Columbia Basin Research at the University of Washington."
+  "description": "Introduction Spatial data showing land-use types and watersheds for all islands that make up the state of Hawaii have been provided by the Hawaii Statewide GIS Program. This report visualizes land-use and watershed data in multiple interactive maps."
 }
 </script>
 
@@ -300,7 +300,7 @@
 
 
 
-  <title>Steelhead Migration Time Series Analysis | Alex Milward</title>
+  <title>Hawaii Land-use and Watershed Analysis | Alex Milward</title>
 
 </head>
 
@@ -533,7 +533,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Steelhead Migration Time Series Analysis</h1>
+  <h1>Hawaii Land-use and Watershed Analysis</h1>
 
   
 
@@ -553,7 +553,7 @@
           Last updated on
       
     
-    Mar 9, 2020
+    Mar 10, 2020
   </span>
   
 
@@ -588,9 +588,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 480px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 463px;">
   <div style="position: relative">
-    <img src="/project/featured_hu20b394546c08d09731bd0e6cba906959_281541_720x0_resize_q90_lanczos.jpeg" alt="" class="featured-image">
+    <img src="/project/featured_huba210dfeaa1583d9439abc85241ea7fe_52522_720x0_resize_q90_lanczos.jpg" alt="" class="featured-image">
     
   </div>
 </div>
@@ -605,99 +605,25 @@
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Steelhead passage through the Bonneville Dam in Oregon has been recorded on a daily basis from 1939 through September of 2019, and the data for these recordings has been provided by <a href="http://www.cbr.washington.edu/dart/query/adult_basin_sum"><em>Columbia Basin Research at the University of Washington</em></a>. This report explores time series data and visualizes daily, monthly, and annual counts of steelhead passage through the dam from 1939 to 2019 (Figures 2, 3, 4). These visualizations show temporal variation in steelhead passage through the years.</p>
-<p>RStudio packages for this analysis include: tidyverse, janitor, lubridate, here, tsibble, and paletteer.
+<p>Spatial data showing land-use types and watersheds for all islands that make up the state of Hawaii have been provided by the <a href="http://geoportal.hawaii.gov/search"><em>Hawaii Statewide GIS Program</em></a>. This report visualizes land-use and watershed data in multiple interactive maps. The first map shows land-use type across the state, and the total area covered by each land-use type (Figure 2.). The second map shows the location, area covered, and names of all watersheds in the state (Figure 3.) This report provides a visual analysis of unique spatial features in Hawaii.</p>
+<p>RStudio packages for this analysis include: tidyverse, janitor, here, sf, tmap, mapview, and leaflet.
 All data analysis and visualization was produced using RStudio Version 1.2.1335.</p>
 <div class="figure">
-<img src="bonneville.jpeg" alt="Figure 1. Bonneville Dam, Oregon. Credit: US Army Corps of Engineers" />
-<p class="caption"><strong>Figure 1.</strong> Bonneville Dam, Oregon. Credit: <a href="https://www.nwp.usace.army.mil/bonneville/">US Army Corps of Engineers</a></p>
+<img src="hawaii-islands-map.jpg" alt="Figure 1. Hawaiin Islands. Credit: Free World Maps" />
+<p class="caption"><strong>Figure 1.</strong> Hawaiin Islands. Credit: <a href="https://www.freeworldmaps.net/united-states/hawaii/map.html">Free World Maps</a></p>
 </div>
-<pre class="r"><code># Read in and look at data
-
-fish &lt;- read_csv(&quot;cbr_fish_passage_bonneville_allyrs_steelhead.csv&quot;) %&gt;% 
-  mutate(location = str_to_lower(location), parameter = str_to_lower(parameter)) %&gt;% 
-  rename(&quot;mmdd&quot; = &quot;mm-dd&quot;)
-
-# names(fish)
-# unique(fish$parameter)
-# unique(fish$`mm-dd`)
-# unique(fish$unit)
-# unique(fish$datatype)
-# unique(fish$value)</code></pre>
-<pre class="r"><code># Parse dates
-
-fish_clean &lt;- fish %&gt;% 
-  mutate(yearmonthday = str_c(year, mmdd, sep = &quot;-&quot;)) %&gt;% 
-  mutate(year_mo_day = lubridate::parse_date_time(yearmonthday, &quot;ydm&quot;)) %&gt;% 
-  mutate(day = day(year_mo_day)) %&gt;% 
-  mutate(month = month(year_mo_day, label = TRUE)) %&gt;% 
-  drop_na(value)
-  
-
-fish_dates &lt;- fish %&gt;% 
-  mutate(mo_day = lubridate::parse_date_time(mmdd, &quot;dm&quot;)) %&gt;% 
-  mutate(day = day(mo_day)) %&gt;% 
-  mutate(month = month(mo_day, label = TRUE)) %&gt;% 
-  select(-mo_day) </code></pre>
-<pre class="r"><code># Plot time series of daily data
-# fish_ts &lt;- as_tsibble(fish_clean, key = value, index = month)</code></pre>
-<div id="daily-variation-in-steelhead-passage" class="section level3">
-<h3>Daily variation in steelhead passage:</h3>
-<pre class="r"><code># daily plot through the years
-
-ggplot(data = fish_clean, aes(x = year_mo_day, y = value)) +
-  geom_line(color = &quot;blue&quot;, size = 0.2) +
-  labs(x = &quot;year&quot;,
-       y = &quot;steelhead passing per day&quot;,
-       title = &quot;Daily steelhead passage through Bonneville Damn&quot;,
-       subtitle = &quot;1939-2019&quot;) +
-  theme_dark() +
-  scale_y_continuous(limits = c(0,35000))</code></pre>
-<p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p><strong>Figure 2.</strong> Daily observations for counts of steelhead passing through Bonneville Dam visualized. Daily counts appear to follow a consistant seasonality with the start of each year experiencing much lower counts than the middle of each year. Daily counts peak in 2009 and taper off to lower than 1940 daily values at the end of 2019. <em>Data: Columbia Basin Research</em></p>
+<div id="land-use" class="section level3">
+<h3>Land-Use</h3>
+<p><img src="/project/spatial-analysis/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><strong>Figure 2</strong> Interactive map of Hawaii, faceted by land-use cover and area covered by land-use type. Evergreen forest land, bare exposed rock, and mixed bush and shrub rangeland cover the majority of all islands of Hawaii. For the state, residential and commercial areas make up a very small proportion of land-use and total area covered.</p>
 </div>
-<div id="monthly-variation-in-steelhead-passage" class="section level3">
-<h3>Monthly variation in steelhead passage:</h3>
-<pre class="r"><code># Monthly passage through the years
-
-fish_monthly &lt;- fish_clean %&gt;% 
-  mutate(month_sep = yearmonth(year_mo_day)) %&gt;% 
-  group_by(month_sep, year, month) %&gt;% 
-  tally(value)
-
-ggplot(data = fish_monthly, aes(x = year, y = n)) +
-  geom_line(aes(color = month), show.legend = TRUE) +
-  theme_dark() +
-  scale_y_discrete(limits = c(0, 50000, 100000, 150000, 200000, 250000, 300000, 350000)) +
-  scale_x_discrete(limits = c(1940, 1960, 1980, 2000, 2020)) +
-  scale_color_paletteer_d(&quot;palettetown::rayquaza&quot;) +
-  labs(x = &quot;year&quot;,
-       y = &quot;monthly count&quot;,
-       title = &quot;Monthly steelhead counts through Bonneville Dam&quot;,
-       subtitle = &quot;1939-2019&quot;)</code></pre>
-<p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><strong>Figure 3.</strong> Monthly observations for counts of steelhead passing through Bonneville Dam visualized. Counts of steelhead passing are aggreggated by month from 1939 to 2019. Here we see the highest counts through the years are observed in July (yellow), August (brown), and September (gold), with hardly any observations in the winter months. <em>Data: Columbia Basin Research</em></p>
-</div>
-<div id="annual-variation-in-steelhead-passage" class="section level3">
-<h3>Annual variation in steelhead passage:</h3>
-<pre class="r"><code># Annual passage of fish through Bonneville Dam
-fish_annual &lt;- fish_clean %&gt;% 
-  group_by(year) %&gt;% 
-  summarize(tot = sum(value))
-
-ggplot(data = fish_annual, aes(x = year, y = tot)) +
-  geom_line(color = &quot;purple&quot;) +
-  theme_dark() +
-  scale_y_discrete(limits = c(0, 100000, 200000, 300000, 400000, 500000, 600000, 6550000)) +
-  scale_x_discrete(limits = c(1940, 1960, 1980, 2000, 2020)) +
-  labs(x = &quot;year&quot;,
-       y = &quot;annual count&quot;,
-       title = &quot;Annual steelhead counts through Bonneville Dam&quot;,
-       subtitle = &quot;1939-2019&quot;)</code></pre>
-<p><img src="/project/time-series/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p><strong>Figure 4.</strong> Annual counts of steelhead passing through Bonneville Dam visualized by the purple line from 1939 to 2019. Counts remain below 400,000 steelheads annually, with the first big peak reaching around 380,000 in 1986. The largest peaks occur in 2001 and 2009, with 633,073 and 604,970 steelheads, respectively. Since 2009, annual steelhead passage through the dam has decreased, to a low of 77,195 in 2019. <em>Data: Columbia Basin Research</em></p>
-<p><strong>Sources:</strong>
-Columbia River DART, Columbia Basin Research, University of Washington. (2019). Adult Passage Graphics &amp; Text. Available from <a href="http://www.cbr.washington.edu/dart/query/adult_graph_text" class="uri">http://www.cbr.washington.edu/dart/query/adult_graph_text</a></p>
+<div id="watersheds" class="section level3">
+<h3>Watersheds</h3>
+<p><img src="/project/spatial-analysis/index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>Figure 3</strong> Interactive map of Hawaii showing all watersheds in the state. Hovering over each area reveals the watershed name. The largest watersheds are found on the big island of Hawaii, and include the Pohakuloa, Wailuku, Kaahakini, and Pahala watersheds. For such seemingly small land-area, there are 558 total watersheds, owing to the unique topography of the state.</p>
+<p><strong>Sources:</strong></p>
+<p>Hawaii Statewide GIS Program. (2019). GDSI, 1995, 1999; State of Hawaii Commission on Water Resource Management (CWRM), 2008. Provided to State GIS, August, 2017. Available from <a href="http://geoportal.hawaii.gov/datasets/watersheds" class="uri">http://geoportal.hawaii.gov/datasets/watersheds</a></p>
+<p>Hawaii Statewide GIS Program. (2020). 1976 Digital GIRAS (Geographic Information Retrieval and Analysis). Provided to State GIS, Octover, 2017. Avaialbe from <a href="http://geoportal.hawaii.gov/datasets/land-use-land-cover-lulc" class="uri">http://geoportal.hawaii.gov/datasets/land-use-land-cover-lulc</a></p>
 </div>
 </div>
 
@@ -722,7 +648,7 @@ Columbia River DART, Columbia Basin Research, University of Washington. (2019). 
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/project/&amp;text=Steelhead%20Migration%20Time%20Series%20Analysis" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/project/&amp;text=Hawaii%20Land-use%20and%20Watershed%20Analysis" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -735,7 +661,7 @@ Columbia River DART, Columbia Basin Research, University of Washington. (2019). 
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/project/&amp;t=Steelhead%20Migration%20Time%20Series%20Analysis" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/project/&amp;t=Hawaii%20Land-use%20and%20Watershed%20Analysis" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -748,7 +674,7 @@ Columbia River DART, Columbia Basin Research, University of Washington. (2019). 
       
       
       <li>
-        <a href="mailto:?subject=Steelhead%20Migration%20Time%20Series%20Analysis&amp;body=/project/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Hawaii%20Land-use%20and%20Watershed%20Analysis&amp;body=/project/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -761,7 +687,7 @@ Columbia River DART, Columbia Basin Research, University of Washington. (2019). 
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/project/&amp;title=Steelhead%20Migration%20Time%20Series%20Analysis" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/project/&amp;title=Hawaii%20Land-use%20and%20Watershed%20Analysis" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -774,7 +700,7 @@ Columbia River DART, Columbia Basin Research, University of Washington. (2019). 
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Steelhead%20Migration%20Time%20Series%20Analysis%20/project/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Hawaii%20Land-use%20and%20Watershed%20Analysis%20/project/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -787,7 +713,7 @@ Columbia River DART, Columbia Basin Research, University of Washington. (2019). 
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/project/&amp;title=Steelhead%20Migration%20Time%20Series%20Analysis" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/project/&amp;title=Hawaii%20Land-use%20and%20Watershed%20Analysis" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
